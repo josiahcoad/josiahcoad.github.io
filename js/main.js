@@ -90,7 +90,7 @@ function rotateTerm() {
 
  var ct = $("#rotate").data("term") || 0;
 
- console.log(terms.eq([ct]).text());
+ // console.log(terms.eq([ct]).text());
  
   $("#rotate").data("term", 
     ct == terms.length -1 ? 0 : ct + 1).text(terms.eq([ct]).text())
@@ -100,7 +100,8 @@ function rotateTerm() {
 
 $(document).ready(function(){
 
-    $(rotateTerm);
+    $(".owl-prev").hide(); // hide the back button for about me
+    $(rotateTerm);         // fade through hello worlds
 	/* ========================================================================= */
 	/*	Menu item highlighting
 	/* ========================================================================= */
