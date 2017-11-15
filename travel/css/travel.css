@@ -6,6 +6,7 @@
 
 body {
   padding-top: 54px;
+  font-family: 'Poppins', sans-serif;
 }
 
 @media (min-width: 992px) {
@@ -20,4 +21,25 @@ body {
 
 .pagination {
   margin-bottom: 30px;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url(../img/austria_mountains.jpg);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: black 0.3em 0.3em 0.3em;
+}
+
+#introduction {
+     background-color: #e6e6e6;
+     border-radius: 3px;
+     border-color: silver;
+     border-style: solid;
+     padding: 10px;
+     margin: 10px;
+     color: #666666;
+
 }
