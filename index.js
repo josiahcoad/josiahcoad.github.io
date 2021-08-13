@@ -3,6 +3,20 @@
 // This example displays a marker at the center of Australia.
 // When the user clicks the marker, an info window opens.
 
+const getIsMobile = () => {
+    const ua = navigator.userAgent;
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+        return true; //"tablet";
+    }
+    else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+        return true; //"mobile";
+    }
+    return false; //"desktop";
+};
+
+const isMobile = getIsMobile();
+
+
 const locations = [
     "91 Rainey St #120 Austin TX 78701 USA,https://eatdrinkanthem.com/,30.260598,-97.7376285,Anthem",
     "111 E Cesar Chavez St Austin TX 78701 USA,https://www.thelinehotel.com/,30.2626651,-97.7436224,Arlo Grey",
@@ -450,7 +464,7 @@ function makeMarker(location) {
     const infowindow = new google.maps.InfoWindow({
         content: makeContentString(location),
     });
-    marker.addListener("mouseover", () => {
+    marker.addListener(isMobile ? "click" : "mouseover", () => {
         infowindow.open({
             anchor: marker,
             map,
@@ -458,6 +472,9 @@ function makeMarker(location) {
         });
     });
     google.maps.event.addListener(marker, 'mouseout', function() {
+        infowindow.close();
+    });
+    google.maps.event.addListener(map, "click", function() {
         infowindow.close();
     });
 }
@@ -482,3 +499,4 @@ function time12to24(time) {
 // $(document).ready(function(){
 //     time12to24('2 PM');
 // });        
+
