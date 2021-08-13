@@ -17,7 +17,7 @@ const locations = [
     "9333 Research Blvd #A600 Austin TX 78759 USA,https://www.daveandbusters.com/locations/austin,30.38346,-97.7374266,Dave &#038; Buster",
     "214 W 4th St Suite B Austin TX 78701 USA,https://dumontsaustin.com/,30.2669961,-97.7453625,DuMont Down Low",
     "500 W 5th St Austin TX 78701 USA,https://fixesouthernhouse.com/,30.2688431,-97.748206,Fixe Southern House",
-    "306 E 53rd St Austin TX 78751 USA,http://fndaustin.com/,30.317075,-97.7195529,Foreign  Domestic",
+    "306 E 53rd St Austin TX 78751 USA,http://fndaustin.com/,30.317075,-97.7195529,Foreign Domestic",
     "5811 Berkman Dr Austin TX 78723 USA,https://www.hanksaustin.com/,30.3120945,-97.69220500000002,Hank",
     "4323 S IH 35 Frontage Rd Austin TX 78744 USA,https://www.hideawayatx.com/ ,30.2115738,-97.7527656,Hideaway Kitchen  Bar",
     "506 West Ave Austin TX 78701 USA,http://irenesaustin.com/,30.2698104,-97.7511558,Irene",
@@ -166,10 +166,10 @@ const deals = [
     "Foreign & Domestic,Onion Rings & Buttermilk,4,Food",
     "Foreign & Domestic,Red Pepper Zeppole & Chevre,6,Food",
     "Foreign & Domestic,44 Farms Cheddar Burger,8,Food",
-    "Hank’s,Beer,1,Drink",
-    "Hank’s,Frozen Cocktails & Tap Cocktails,6,Drink",
-    "Hank’s,Tap Wine,6,Drink",
-    "Hank’s,Appetizers,3,Food",
+    "Hank,Beer,1,Drink",
+    "Hank,Frozen Cocktails & Tap Cocktails,6,Drink",
+    "Hank,Tap Wine,6,Drink",
+    "Hank,Appetizers,3,Food",
     "Hideaway Kitchen & Bar,Beer,1,Drink",
     "Hideaway Kitchen & Bar,Cocktails,2,Drink",
     "Hideaway Kitchen & Bar,Wine,2,Drink",
@@ -199,7 +199,7 @@ const deals = [
     "Nightcap,Dip,10,Food",
     "Nightcap,Grilled Texas Quail,10,Food",
     "Péché,Cocktails,6,Drink",
-    "Perla’s,Beverages,2,Drink",
+    "Perla,Beverages,2,Drink",
     "Scholz Garten,Draught Beer,2,Drink",
     "Scholz Garten,Cocktails,5,Drink",
     "Scholz Garten,Haus Wine,5,Drink",
@@ -276,11 +276,11 @@ const deals = [
     "Uchiko,Boquerones Nigiri(2 pc),4,Food",
     "Uchiko,Jasmine Cream,6,Food",
     "Uchiko,Bruleed Donut,6,Food",
-    "Uncle Nicky’s,Disco Lemonade Shots,1,Drink",
-    "Uncle Nicky’s,Alstadt & High Life Ponies,2,Drink",
-    "Uncle Nicky’s,Glasses of House White and Red,4,Drink",
-    "Uncle Nicky’s,Spritz (Aperol, UN, Blood Orange),6,Drink",
-    "Uncle Nicky’s,Cheese Plate + Bottle of Wine (House White/Red),20,Drink",
+    "Uncle Nicky,Disco Lemonade Shots,1,Drink",
+    "Uncle Nicky,Alstadt & High Life Ponies,2,Drink",
+    "Uncle Nicky,Glasses of House White and Red,4,Drink",
+    "Uncle Nicky,Spritz (Aperol, UN, Blood Orange),6,Drink",
+    "Uncle Nicky,Cheese Plate + Bottle of Wine (House White/Red),20,Drink",
     "W Austin,Cocktails,5,Drink",
     "W Austin,Snacks,5,Food",
 ].map(row => {
@@ -310,15 +310,15 @@ const times = [
     "Bufalina Pizza,5:30 PM,4 PM,tuesday,thursday",
     "Central Standard,6:30 PM,3 PM,wednesday,saturday",
     "Clark’s Oyster Bar,5 PM,3 PM,monday,friday",
-    "Clark’s Oyster Bar,5 PM,3 PM,saturday & sunday,saturday & sunday",
+    "Clark’s Oyster Bar,5 PM,3 PM,saturday,sunday",
     "Clark’s Oyster Bar,5 PM,3 PM,monday,friday",
-    "Clark’s Oyster Bar,5 PM,3 PM,saturday & sunday,saturday & sunday",
-    "Contigo,6 PM,4 PM,sunday,thursday",
-    "Contigo,6 PM,4 PM,sunday,thursday",
+    "Clark’s Oyster Bar,5 PM,3 PM,saturday,sunday",
+    "Contigo,6 PM,4 PM,thursday,sunday",
+    "Contigo,6 PM,4 PM,thursday,sunday",
     "Culinary Dropout,6 PM,3 PM,monday,friday",
     "Culinary Dropout,6 PM,3 PM,monday,friday",
-    "Dave & Buster’s,7 PM,4 PM,monday,friday",
-    "Dave & Buster’s,11 PM,9 PM,sunday,thursday",
+    "Dave & Buster,7 PM,4 PM,monday,friday",
+    "Dave & Buster,11 PM,9 PM,thursday,sunday",
     "DuMont’s Down Low,7 PM,5 PM,monday,friday",
     "DuMont’s Down Low,2 AM,5 PM,sunday,sunday",
     "Fixe Southern House,7 PM,4:30 PM,monday,saturday",
@@ -327,12 +327,12 @@ const times = [
     "Fixe Southern House,2 AM,2 PM,sunday,sunday",
     "Foreign & Domestic,6:30 PM,5:30 PM,tuesday,saturday",
     "Foreign & Domestic,6:30 PM,5:30 PM,tuesday,saturday",
-    "Hank’s,6:30 PM,3 PM,monday,sunday",
-    "Hank’s,6:30 PM,3 PM,monday,sunday",
+    "Hank,6:30 PM,3 PM,monday,sunday",
+    "Hank,6:30 PM,3 PM,monday,sunday",
     "Hideaway Kitchen & Bar,7 PM,3 PM,monday,sunday",
     "Hideaway Kitchen & Bar,7 PM,4 PM,monday,sunday",
-    "Irene’s,6:30 PM,3:30 PM,monday,saturday",
-    "Irene’s,6:30 PM,3:30 PM,monday,saturday",
+    "Irene,6:30 PM,3:30 PM,monday,saturday",
+    "Irene,6:30 PM,3:30 PM,monday,saturday",
     "Josephine House,6 PM,4 PM,monday,saturday",
     "Josephine House,6 PM,4 PM,monday,saturday",
     "Juliet Italian Kitchen,6 PM,3 PM,monday,sunday",
@@ -346,14 +346,14 @@ const times = [
     "Olive & June,6 PM,2PM,tuesday,friday",
     "Péché,7 PM,4 PM,tuesday,friday",
     "Péché,7 PM,4 PM,tuesday,friday",
-    "Perla’s,6 PM,3 PM,monday,friday",
-    "Perla’s,6 PM,3 PM,monday,friday",
+    "Perla,6 PM,3 PM,monday,friday",
+    "Perla,6 PM,3 PM,monday,friday",
     "Scholz Garten,5 PM,3 PM,wednesday,friday",
     "Scholz Garten,7 PM,4 PM,monday,friday",
     "She’s Not Here,6:30 PM,4 PM,monday,sunday",
     "She’s Not Here,6:30 PM,4 PM,monday,sunday",
-    "Swift’s Attic,5:30 PM,4 PM,thursday,saturday",
-    "Swift’s Attic,5:30 PM,4 PM,thursday,saturday",
+    "Swift Attic,5:30 PM,4 PM,thursday,saturday",
+    "Swift Attic,5:30 PM,4 PM,thursday,saturday",
     "The Roosevelt Room,7 PM,4 PM,monday,saturday",
     "The Roosevelt Room,7 PM,3 PM,sunday,sunday",
     "The Roosevelt Room,7 PM,4 PM,monday,saturday",
@@ -362,7 +362,7 @@ const times = [
     "Trulucks Downtown,6 PM,4:30 PM,sunday,thursday",
     "Uchiko,6:30 PM,5 PM,monday,sunday",
     "Uchiko,6:30 PM,5 PM,monday,sunday",
-    "Uncle Nicky’s,5 PM,2 PM,monday,sunday",
+    "Uncle Nicky,5 PM,2 PM,monday,sunday",
     "Vamonos,6 PM,4 PM,monday,saturday",
     "Vamonos,6 PM,4 PM,monday,saturday",
     "W Austin,7 PM,5 PM,monday,friday",
@@ -400,10 +400,13 @@ const isOpen = name =>
     times
     .filter(l => l.name == name)
     .filter(l => day_map[l.start_day] <= day_map[today] && day_map[l.end_day] >= day_map[today])
-    // .filter(l => l.start_time <= time && l.end_time >= time && )
+    // .filter(l => l.start_time <= time && l.end_time >= time)
     .length > 0
 
-const getTime = name => {const x = times.filter(l => l.name == name); const y = x.length > 0 ? x[0] : {start_time: 'unknown', end_time: 'unknown'}; console.log(y); return y;}
+const getTime = name => {
+    const x = times.filter(l => l.name == name);
+    return x.length > 0 ? x[0] : {start_time: 'unknown', end_time: 'unknown'};
+}
 
 function makeContentString(location) {
     return '<div id="content">' +
@@ -457,10 +460,25 @@ function makeMarker(location) {
     google.maps.event.addListener(marker, 'mouseout', function() {
         infowindow.close();
     });
-    // geocoder.geocode({ 'address': location.address }, function(results, status) {
-    //     if (status == 'OK') {
-    //     } else {
-    //         alert('Geocode was not successful for the following reason: ' + status);
-    //     }
-    // });
 }
+
+function time12to24(time) {
+    if (!time.includes(':')) {
+        [time, ampm] = time.split(' ')
+        time = time + ':00 ' + ampm
+    }
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+    var AMPM = time.match(/\s(.*)$/)[1];
+    if(AMPM == "PM" && hours<12) hours = hours+12;
+    if(AMPM == "AM" && hours==12) hours = hours-12;
+    var sHours = hours.toString();
+    var sMinutes = minutes.toString();
+    if(hours<10) sHours = "0" + sHours;
+    if(minutes<10) sMinutes = "0" + sMinutes;
+    return sHours + ":" + sMinutes;
+}
+
+// $(document).ready(function(){
+//     time12to24('2 PM');
+// });        
