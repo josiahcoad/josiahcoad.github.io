@@ -414,7 +414,7 @@ const isOpen = name =>
     times
     .filter(l => l.name == name)
     .filter(l => day_map[l.start_day] <= day_map[today] && day_map[l.end_day] >= day_map[today])
-    // .filter(l => l.start_time <= time && l.end_time >= time)
+    .filter(l => time24toDecimal(time12to24(l.start_time)) <= time_now && time24toDecimal(time12to24(l.end_time)) >= time_now)
     .length > 0
 
 const getTime = name => {
@@ -428,7 +428,7 @@ function makeContentString(location) {
         "</div>" +
         `<h1 id="firstHeading" class="firstHeading">${location.name}</h1>` +
         '<div id="bodyContent">' +
-        `<p>${(isOpen(location.name) ? 'Happyning today!' : 'Not today :(')}</p>` +
+        `<p>${(isOpen(location.name) ? 'Happyning now!' : 'Not now :(')}</p>` +
         `<p>${getTime(location.name).start_time}-${getTime(location.name).end_time}</p>` +
         '<hr>' +
         `<p><a href="${location.website}">Website</a>` +
@@ -440,7 +440,7 @@ function makeContentString(location) {
 }
 
 const today = 'friday';
-const time = '17:00';
+const time_now = 15;
 var geocoder;
 var map;
 
@@ -500,3 +500,8 @@ function time12to24(time) {
 //     time12to24('2 PM');
 // });        
 
+function time24toDecimal(time) {
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+    return hours + minutes / 60;
+}
