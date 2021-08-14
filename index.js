@@ -310,26 +310,15 @@ const deals = [
 const times = [
     "Anthem,6:30 PM,4:30 PM,wednesday,friday",
     "Anthem,6:30 PM,3 PM,saturday,saturday",
-    "Anthem,6:30 PM,4:30 PM,wednesday,friday",
-    "Anthem,6:30 PM,3 PM,saturday,saturday",
-    "Arlo Grey,5 PM,4 PM,monday,thursday",
     "Arlo Grey,5 PM,4 PM,monday,thursday",
     "Bar Peached,6:30 PM,5 PM,monday,sunday",
-    "Bar Peached,6:30 PM,5 PM,monday,sunday",
-    "Better Half Coffee,6 PM,3 PM,sunday,friday",
     "Better Half Coffee,6 PM,3 PM,sunday,friday",
     "Black Star Co-Op,6 PM,4 PM,tuesday,thursday",
-    "Black Star Co-Op,6 PM,4 PM,tuesday,thursday",
-    "Bufalina Pizza,5:30 PM,4 PM,tuesday,thursday",
     "Bufalina Pizza,5:30 PM,4 PM,tuesday,thursday",
     "Central Standard,6:30 PM,3 PM,wednesday,saturday",
     "Clark’s Oyster Bar,5 PM,3 PM,monday,friday",
     "Clark’s Oyster Bar,5 PM,3 PM,saturday,sunday",
-    "Clark’s Oyster Bar,5 PM,3 PM,monday,friday",
-    "Clark’s Oyster Bar,5 PM,3 PM,saturday,sunday",
     "Contigo,6 PM,4 PM,thursday,sunday",
-    "Contigo,6 PM,4 PM,thursday,sunday",
-    "Culinary Dropout,6 PM,3 PM,monday,friday",
     "Culinary Dropout,6 PM,3 PM,monday,friday",
     "Dave & Buster,7 PM,4 PM,monday,friday",
     "Dave & Buster,11 PM,9 PM,thursday,sunday",
@@ -337,49 +326,30 @@ const times = [
     "DuMont’s Down Low,2 AM,5 PM,sunday,sunday",
     "Fixe Southern House,7 PM,4:30 PM,monday,saturday",
     "Fixe Southern House,2 AM,2 PM,sunday,sunday",
-    "Fixe Southern House,7 PM,4:30 PM,monday,saturday",
-    "Fixe Southern House,2 AM,2 PM,sunday,sunday",
     "Foreign & Domestic,6:30 PM,5:30 PM,tuesday,saturday",
-    "Foreign & Domestic,6:30 PM,5:30 PM,tuesday,saturday",
-    "Hank,6:30 PM,3 PM,monday,sunday",
     "Hank,6:30 PM,3 PM,monday,sunday",
     "Hideaway Kitchen & Bar,7 PM,3 PM,monday,sunday",
-    "Hideaway Kitchen & Bar,7 PM,4 PM,monday,sunday",
-    "Irene,6:30 PM,3:30 PM,monday,saturday",
     "Irene,6:30 PM,3:30 PM,monday,saturday",
     "Josephine House,6 PM,4 PM,monday,saturday",
-    "Josephine House,6 PM,4 PM,monday,saturday",
-    "Juliet Italian Kitchen,6 PM,3 PM,monday,sunday",
     "Juliet Italian Kitchen,6 PM,3 PM,monday,sunday",
     "La Condesa,6 PM,4 PM,wednesday,saturday",
     "La Condesa,3 PM,11 PM,sunday,sunday",
     "Lamberts,7 PM,5 PM,monday,sunday",
-    "Lamberts,7 PM,5 PM,monday,sunday",
-    "Nightcap,7 PM,5 PM,tuesday,friday",
     "Nightcap,7 PM,5 PM,tuesday,friday",
     "Olive & June,6 PM,2PM,tuesday,friday",
     "Péché,7 PM,4 PM,tuesday,friday",
-    "Péché,7 PM,4 PM,tuesday,friday",
-    "Perla,6 PM,3 PM,monday,friday",
     "Perla,6 PM,3 PM,monday,friday",
     "Scholz Garten,5 PM,3 PM,wednesday,friday",
     "Scholz Garten,7 PM,4 PM,monday,friday",
     "She’s Not Here,6:30 PM,4 PM,monday,sunday",
-    "She’s Not Here,6:30 PM,4 PM,monday,sunday",
     "Swift Attic,5:30 PM,4 PM,thursday,saturday",
-    "Swift Attic,5:30 PM,4 PM,thursday,saturday",
-    "The Roosevelt Room,7 PM,4 PM,monday,saturday",
-    "The Roosevelt Room,7 PM,3 PM,sunday,sunday",
     "The Roosevelt Room,7 PM,4 PM,monday,saturday",
     "The Roosevelt Room,7 PM,3 PM,sunday,sunday",
     "Trulucks Arboretum,6 PM,4:30 PM,monday,sunday",
     "Trulucks Downtown,6 PM,4:30 PM,sunday,thursday",
     "Uchiko,6:30 PM,5 PM,monday,sunday",
-    "Uchiko,6:30 PM,5 PM,monday,sunday",
     "Uncle Nicky,5 PM,2 PM,monday,sunday",
     "Vamonos,6 PM,4 PM,monday,saturday",
-    "Vamonos,6 PM,4 PM,monday,saturday",
-    "W Austin,7 PM,5 PM,monday,friday",
     "W Austin,7 PM,5 PM,monday,friday",
 ].map(row => {
     const values = row.split(',');
@@ -392,12 +362,23 @@ const times = [
     }
 });
 
+const places = locations.map(({ name, address, url, lat, lng }) => ({
+    name,
+    address,
+    url,
+    lat,
+    lng,
+    deals: deals.filter(deal => deal.name == name),
+    times: times.filter(time => time.name == name)
+}))
+
+console.log(places);
 
 const getDeals = name =>
     deals
-    .filter(deal => deal.name == name)
-    .map(deal => `<li>$${deal.price} - ${deal.item}</li>`)
-    .join('\n');
+        .filter(deal => deal.name == name)
+        .map(deal => `<li>$${deal.price} - ${deal.item}</li>`)
+        .join('\n');
 
 
 const day_map = {
@@ -410,16 +391,26 @@ const day_map = {
     'sunday': 7,
 }
 
+const day_map_rev = {
+    0: 'sunday',
+    1: 'monday',
+    2: 'tuesday',
+    3: 'wednesday',
+    4: 'thursday',
+    5: 'friday',
+    6: 'saturday',
+}
+
 const isOpen = name =>
     times
-    .filter(l => l.name == name)
-    .filter(l => day_map[l.start_day] <= day_map[today] && day_map[l.end_day] >= day_map[today])
-    .filter(l => time24toDecimal(time12to24(l.start_time)) <= time_now && time24toDecimal(time12to24(l.end_time)) >= time_now)
-    .length > 0
+        .filter(l => l.name == name)
+        .filter(l => day_map[l.start_day] <= day_map[today] && day_map[l.end_day] >= day_map[today])
+        .filter(l => time24toDecimal(time12to24(l.start_time)) <= time_now && time24toDecimal(time12to24(l.end_time)) >= time_now)
+        .length > 0
 
 const getTime = name => {
     const x = times.filter(l => l.name == name);
-    return x.length > 0 ? x[0] : {start_time: 'unknown', end_time: 'unknown'};
+    return x.length > 0 ? x[0] : { start_time: 'unknown', end_time: 'unknown' };
 }
 
 function makeContentString(location) {
@@ -429,6 +420,7 @@ function makeContentString(location) {
         `<h1 id="firstHeading" class="firstHeading">${location.name}</h1>` +
         '<div id="bodyContent">' +
         `<p>${(isOpen(location.name) ? 'Happyning now!' : 'Not now :(')}</p>` +
+        `<p>${getTime(location.name).start_day}-${getTime(location.name).end_day}</p>` +
         `<p>${getTime(location.name).start_time}-${getTime(location.name).end_time}</p>` +
         '<hr>' +
         `<p><a href="${location.website}">Website</a>` +
@@ -439,8 +431,9 @@ function makeContentString(location) {
         "</div>";
 }
 
-const today = 'friday';
-const time_now = 15;
+const date = new Date();
+const today = day_map_rev[date.getDay()];
+const time_now = date.getHours();
 var geocoder;
 var map;
 
@@ -471,10 +464,10 @@ function makeMarker(location) {
             shouldFocus: false,
         });
     });
-    google.maps.event.addListener(marker, 'mouseout', function() {
+    google.maps.event.addListener(marker, 'mouseout', function () {
         infowindow.close();
     });
-    google.maps.event.addListener(map, "click", function() {
+    google.maps.event.addListener(map, "click", function () {
         infowindow.close();
     });
 }
@@ -487,12 +480,12 @@ function time12to24(time) {
     var hours = Number(time.match(/^(\d+)/)[1]);
     var minutes = Number(time.match(/:(\d+)/)[1]);
     var AMPM = time.match(/\s(.*)$/)[1];
-    if(AMPM == "PM" && hours<12) hours = hours+12;
-    if(AMPM == "AM" && hours==12) hours = hours-12;
+    if (AMPM == "PM" && hours < 12) hours = hours + 12;
+    if (AMPM == "AM" && hours == 12) hours = hours - 12;
     var sHours = hours.toString();
     var sMinutes = minutes.toString();
-    if(hours<10) sHours = "0" + sHours;
-    if(minutes<10) sMinutes = "0" + sMinutes;
+    if (hours < 10) sHours = "0" + sHours;
+    if (minutes < 10) sMinutes = "0" + sMinutes;
     return sHours + ":" + sMinutes;
 }
 
