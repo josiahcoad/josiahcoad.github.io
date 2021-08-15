@@ -7,7 +7,7 @@ import Rating from '@material-ui/lab/Rating';
 import mapStyles from '../../mapStyles';
 import useStyles from './styles.js';
 
-const Map = ({ coords, places, setCoords, setBounds, setChildClicked, weatherData }) => {
+const Map = ({ coords, places, setCoords, setBounds, setChildClicked }) => {
   const matches = useMediaQuery('(min-width:600px)');
   const classes = useStyles();
 
@@ -29,8 +29,8 @@ const Map = ({ coords, places, setCoords, setBounds, setChildClicked, weatherDat
         {places.length && places.map((place, i) => (
           <div
             className={classes.markerContainer}
-            lat={Number(place.latitude)}
-            lng={Number(place.longitude)}
+            lat={Number(place.lat)}
+            lng={Number(place.lng)}
             key={i}
           >
             {!matches
@@ -42,14 +42,9 @@ const Map = ({ coords, places, setCoords, setBounds, setChildClicked, weatherDat
                     className={classes.pointer}
                     src={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
                   />
-                  <Rating name="read-only" size="small" value={Number(place.rating)} readOnly />
+                  <Rating name="read-only" size="small" value={Number(place.gmap.rating)} readOnly />
                 </Paper>
               )}
-          </div>
-        ))}
-        {weatherData?.list?.length && weatherData.list.map((data, i) => (
-          <div key={i} lat={data.coord.lat} lng={data.coord.lon}>
-            <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} height="70px" />
           </div>
         ))}
       </GoogleMapReact>
