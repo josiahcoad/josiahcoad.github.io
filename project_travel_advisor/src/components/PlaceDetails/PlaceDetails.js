@@ -6,6 +6,16 @@ import Rating from '@material-ui/lab/Rating';
 
 import useStyles from './styles.js';
 
+const placeHolderPhoto = 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg';
+
+const mkPhotoUrl = (place) => {
+  const photoRef = place.gmap?.photos[0].photo_reference;
+  if (!photoRef) {
+    return placeHolderPhoto;
+  }
+  return `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&key=AIzaSyCxfXAPgVM8ownCZdr8dFbQSg76chB7P4s&maxheight=350`;
+};
+
 const PlaceDetails = ({ place, selected, refProp }) => {
   if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const classes = useStyles();
@@ -14,7 +24,7 @@ const PlaceDetails = ({ place, selected, refProp }) => {
     <Card elevation={6}>
       <CardMedia
         style={{ height: 350 }}
-        image={place.gmap.photos.length > 0 ? place.gmap.photos[0].photo_reference : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
+        image={mkPhotoUrl(place)}
         title={place.name}
       />
       <CardContent>
@@ -40,18 +50,22 @@ const PlaceDetails = ({ place, selected, refProp }) => {
             {place.formatted_address}
           </Typography>
         </Box> */}
-        {place?.deals?.map((deal) => (
+        {place.deals.slice(0, 5).map((deal) => (
           <Box display="flex" justifyContent="space-between" my={1} alignItems="center">
             {/* <img src={award.images.small} /> */}
             <Typography variant="subtitle2" color="textSecondary">${deal.price}, {deal.item}</Typography>
           </Box>
         ))}
+        {place.deals.length > 5 && <Typography variant="subtitle2" color="textSecondary">+ {place.deals.length - 5} more!</Typography>}
         {place.gmap.types.map((type) => (
           <Chip key={type} size="small" label={type} className={classes.chip} />
         ))}
         {place.gmap.formatted_address && (
           <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
-            <LocationOnIcon />{place.gmap.formatted_address}
+            <LocationOnIcon />
+            <Button size="small" color="primary" onClick={() => window.open(`https://www.google.com/maps/place/${place.name}`, '_blank')}>
+              {place.gmap.formatted_address}
+            </Button>
           </Typography>
         )}
         {place.gmap.formatted_phone && (
