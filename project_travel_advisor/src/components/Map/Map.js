@@ -7,6 +7,12 @@ import Rating from '@material-ui/lab/Rating';
 import mapStyles from '../../mapStyles';
 import useStyles from './styles.js';
 
+const date = new Date();
+const dayArray = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+const day = dayArray[date.getDay()];
+
+const getTodaysTime = ({ times }) => times.filter((time) => time.day === day)[0];
+
 const Map = ({ coords, places, setCoords, setBounds, setChildClicked }) => {
   const matches = useMediaQuery('(min-width:600px)');
   const classes = useStyles();
@@ -19,9 +25,9 @@ const Map = ({ coords, places, setCoords, setBounds, setChildClicked }) => {
         center={coords}
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
-        options={{ disableDefaultUI: true, zoomControl: true, styles: mapStyles }}
+        options={{ disableDefaultUI: false, zoomControl: true, styles: mapStyles }}
         onChange={(e) => {
-          setCoords({ lat: e.center.lat, lng: e.center.lng });
+          setCoords({ lat: e.center.lat, lng: e.center.lng }); // notice that this changes where you would get directions from
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
         onChildClick={(child) => setChildClicked(child)}
@@ -38,6 +44,9 @@ const Map = ({ coords, places, setCoords, setBounds, setChildClicked }) => {
               : (
                 <Paper elevation={3} className={classes.paper}>
                   <Typography className={classes.typography} variant="subtitle2" gutterBottom> {place.name}</Typography>
+                  <Typography className={classes.typography} variant="subtitle3" gutterBottom>
+                    {getTodaysTime(place) ? `${getTodaysTime(place).start_time}-${getTodaysTime(place).end_time}` : 'Not Today :('}
+                  </Typography>
                   <Rating name="read-only" size="small" value={Number(place.gmap.rating)} readOnly />
                 </Paper>
               )}
