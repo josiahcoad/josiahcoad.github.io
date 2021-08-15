@@ -38,10 +38,6 @@ const Map = ({ coords, places, setCoords, setBounds, setChildClicked }) => {
               : (
                 <Paper elevation={3} className={classes.paper}>
                   <Typography className={classes.typography} variant="subtitle2" gutterBottom> {place.name}</Typography>
-                  <img
-                    className={classes.pointer}
-                    src={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
-                  />
                   <Rating name="read-only" size="small" value={Number(place.gmap.rating)} readOnly />
                 </Paper>
               )}
