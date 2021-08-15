@@ -16,7 +16,9 @@ const mkPhotoUrl = (place) => {
   return `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&key=AIzaSyCxfXAPgVM8ownCZdr8dFbQSg76chB7P4s&maxheight=350`;
 };
 
-const PlaceDetails = ({ place, selected, refProp }) => {
+const mkDirectionsUrl = (address, coords) => `https://www.google.com/maps/dir/${coords.lat},${coords.lng}/${address}`;
+
+const PlaceDetails = ({ place, selected, refProp, coords }) => {
   if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const classes = useStyles();
 
@@ -63,7 +65,7 @@ const PlaceDetails = ({ place, selected, refProp }) => {
         {place.gmap.formatted_address && (
           <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
             <LocationOnIcon />
-            <Button size="small" color="primary" onClick={() => window.open(`https://www.google.com/maps/place/${place.name}`, '_blank')}>
+            <Button size="small" color="primary" onClick={() => window.open(mkDirectionsUrl(place.gmap.formatted_address, coords), '_blank')}>
               {place.gmap.formatted_address}
             </Button>
           </Typography>

@@ -86,6 +86,7 @@ const App = () => {
               setType={setType}
               rating={rating}
               setRating={setRating}
+              coords={coords}
             />
           </Grid>
           <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
