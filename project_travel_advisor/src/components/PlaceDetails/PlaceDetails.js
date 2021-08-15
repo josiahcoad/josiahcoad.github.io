@@ -11,6 +11,16 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import useStyles from './styles.js';
 
+const titleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const date = new Date();
+const dayArray = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+const day = dayArray[date.getDay()];
+
+const getTodaysTime = (times) => times.filter((time) => time.day === day)[0];
+
+const getTodaysTimeFormatted = ({ times }) => (getTodaysTime(times) ? `${getTodaysTime(times).start_time}-${getTodaysTime(times).end_time}` : 'Not Happyning Today :(');
+
 const placeHolderPhoto = 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg';
 
 const mkPhotoUrl = (place) => {
@@ -45,6 +55,27 @@ const PlaceDetails = ({ place, selected, refProp, coords }) => {
           <Rating name="read-only" value={Number(place.gmap.rating)} readOnly />
           <Typography component="legend">{place.gmap.user_ratings_total} review{place.gmap.user_ratings_total > 1 && 's'}</Typography>
         </Box>
+        <Typography component="legend">{getTodaysTimeFormatted(place)}</Typography>
+        <CardActions disableSpacing>
+          <Typography variant="subtitle2" color="textSecondary">See all times</Typography>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          {place.times.map((time) => (
+            <Box display="flex" justifyContent="space-between" my={1} alignItems="center">
+              <Typography variant="subtitle2" color="textSecondary">{titleCase(time.day)}: {time.start_time}-{time.end_time}</Typography>
+            </Box>
+          ))}
+        </Collapse>
         <Box display="flex" justifyContent="space-between">
           {place.gmap.price_level !== undefined
             && (
@@ -84,7 +115,7 @@ const PlaceDetails = ({ place, selected, refProp, coords }) => {
                 </IconButton>
               </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
-                {place.deals.slice(5, place.deals.length + 1).map((deal) => (
+                {place.deals.slice(5).map((deal) => (
                   <Box display="flex" justifyContent="space-between" my={1} alignItems="center">
                     <Typography variant="subtitle2" color="textSecondary">${deal.price}, {deal.item}</Typography>
                   </Box>
@@ -98,7 +129,7 @@ const PlaceDetails = ({ place, selected, refProp, coords }) => {
         {place.gmap.formatted_address && (
           <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
             <LocationOnIcon />
-            <Button size="small" color="primary" onClick={() => window.open(mkDirectionsUrl(place.gmap.formatted_address, coords), '_blank')}>
+            <Button size="small" color="seconday" onClick={() => window.open(mkDirectionsUrl(place.gmap.formatted_address, coords), '_blank')}>
               {place.gmap.formatted_address}
             </Button>
           </Typography>
@@ -113,7 +144,7 @@ const PlaceDetails = ({ place, selected, refProp, coords }) => {
         {/* <Button size="small" color="primary" onClick={() => window.open(place.web_url, '_blank')}>
           Trip Advisor
         </Button> */}
-        <Button size="small" color="primary" onClick={() => window.open(place.gmap.website, '_blank')}>
+        <Button size="small" color="seconday" onClick={() => window.open(place.gmap.website, '_blank')}>
           Website
         </Button>
       </CardActions>

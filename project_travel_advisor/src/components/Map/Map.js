@@ -11,7 +11,9 @@ const date = new Date();
 const dayArray = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 const day = dayArray[date.getDay()];
 
-const getTodaysTime = ({ times }) => times.filter((time) => time.day === day)[0];
+const getTodaysTime = (times) => times.filter((time) => time.day === day)[0];
+
+const getTodaysTimeFormatted = ({ times }) => (getTodaysTime(times) ? `${getTodaysTime(times).start_time}-${getTodaysTime(times).end_time}` : 'Not Today :(');
 
 const Map = ({ coords, places, setCoords, setBounds, setChildClicked }) => {
   const matches = useMediaQuery('(min-width:600px)');
@@ -45,7 +47,7 @@ const Map = ({ coords, places, setCoords, setBounds, setChildClicked }) => {
                 <Paper elevation={3} className={classes.paper}>
                   <Typography className={classes.typography} variant="subtitle2" gutterBottom> {place.name}</Typography>
                   <Typography className={classes.typography} variant="subtitle3" gutterBottom>
-                    {getTodaysTime(place) ? `${getTodaysTime(place).start_time}-${getTodaysTime(place).end_time}` : 'Not Today :('}
+                    {getTodaysTimeFormatted(place)}
                   </Typography>
                   <Rating name="read-only" size="small" value={Number(place.gmap.rating)} readOnly />
                 </Paper>
