@@ -1,0 +1,177 @@
+body {
+    overflow-y: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
+.appbar {
+    width: 80%;
+    left: 0;
+    right: 0;
+    margin: 10px auto;
+    position: absolute;
+    z-index: 2;
+}
+
+.searchbar {
+    height: 40px;
+    border: 1px solid #C6C6C6C6;
+    display: flex;
+    border-radius: 100px;
+    justify-content: flex-start;
+    padding-left: 20px;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.appbar .filterbar {
+    display: flex;
+    justify-content: space-around;
+    height: 30px;
+}
+
+.appbar .filterbar .filter {
+    border-radius: 15px;
+    background: white;
+    width: 90px;
+    height: 80px;
+    height: 100%;
+    color: black;
+    cursor: pointer;
+    padding: 0 auto;
+    border: 1px solid #C6C6C6;
+}
+
+.appbar .text {
+    color: #838383;
+    font-size: 15;
+}
+
+.appbar .filterbar .text {
+    color: black;
+    font-size: 12;
+}
+
+.map img {
+    position: fixed;
+    object-fit: cover;
+    height: 50%;
+    width: 100%;
+    z-index: 1;
+    margin-top: -8px;
+    margin-left: -8px;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+.places-list {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.places-list::-webkit-scrollbar {
+    display: none;
+}
+
+.places-list .place-holder {
+    background-color: rgba(1, 1, 1, 0);
+    height: 45%;
+}
+
+.place-holder-seperator {
+    height: 20px;
+    border-radius: 30px 30px 0 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -10px;
+}
+
+.tiny-gray-box {
+    background-color: #C6C6C6;
+    height: 3px;
+    width: 40px;
+    border-radius: 3px;
+}
+
+.place {
+    z-index: 2;
+    color: #4B4B4B;
+    background-color: white;
+    padding-top: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.image-horizontal-scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    position: relative;
+    overflow-x: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    white-space: nowrap;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.image-horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.image-horizontal-scroll img {
+    object-fit: cover;
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.place-details {
+    height: 80px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.place-details .place-name {
+    font-size: 15px;
+    margin-left: -5px;
+}
+
+.deals-preview-container {
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.deals-preview-container::-webkit-scrollbar {
+    display: none;
+}
+
+.deals-preview {
+    font-size: 11px;
+}
